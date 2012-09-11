@@ -21,7 +21,7 @@ public class CarMove : MonoBehaviour {
 	public float brake_max = 100F;
 	
 	public int levelsRecordLimit = 1;
-	public float deltaMiliSecondsRecord = 1F;
+	public float deltaMiliSecondsRecord = 0.01F;
 	public bool shouldSavePath = false;
 	public bool shouldReplay = false;
 	private float lastPathMilisencods = 0F;
@@ -35,15 +35,17 @@ public class CarMove : MonoBehaviour {
 	private bool reverse;
 	private float localEulerAngles;
 	Vector3 aux;
-	private int nextPoint = 0;
+	public int nextPoint = 0;
 	
 	
-//	private List<GameObject> levelsPahtList;
-//	private List<Transform> currentLevelsPathArrayList;
+	private List<Transform> levelsPahtList;
+	private List<Vector3> currentPositionPathList;
+	private List<Quaternion> currentRotatePathList;
 	
 	void Start() {
-		levelsPahtList = new List();
-		currentLevelsPathArrayList = new List();
+		levelsPahtList = new List<Transform>();
+		currentPositionPathList = new List<Vector3>();
+		currentRotatePathList = new List<Quaternion>();
 		lastPathMilisencods = Time.time;
 		rigidbody.centerOfMass = new Vector3(0,-0.5F,0);
 	}
@@ -62,9 +64,13 @@ public class CarMove : MonoBehaviour {
 			shouldReplay = !shouldReplay;
 		}
 	 	if(shouldReplay){
-			//Transform currentTrasnformt = currentLevelsPathArrayList[nextPoint];
-			//transform.position = currentTrasnformt.position;
-			//transform.rotation = currentTrasnformt.rotation;
+			if(nextPoint < currentPositionPathList.Count){
+				Vector3 currentPosition = currentPositionPathList[nextPoint++];
+				Quaternion currentRotation = currentRotatePathList[nextPoint++];
+				
+				transform.position = currentPosition;
+				transform.rotation = currentRotation;
+			}
 		}else{
 			if(speed < 0.1) {
 				if(back > 0) { reverse = true; }
@@ -116,7 +122,8 @@ public class CarMove : MonoBehaviour {
 		print(timepased);
 		if( timepased < Time.time){
 			lastPathMilisencods = Time.time;
-			currentLevelsPathArrayList.Add(transform);
+			currentPositionPathList.Add(transform.position);
+			currentRotatePathList.Add(transform.rotation);
 		}
 	}
 	
