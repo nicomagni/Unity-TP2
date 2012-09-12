@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 
 Project("{03AFF697-0B90-36D8-87CF-651B39385E3B}") = "GoCar", "Assembly-CSharp-vs.csproj", "{C47E98E7-7BBF-4651-F2D2-185C93ABA45B}"
 EndProject
+Project("{03AFF697-0B90-36D8-87CF-651B39385E3B}") = "GoCar", "Assembly-CSharp-Editor-vs.csproj", "{17F0FAD1-E773-C2DC-0C73-A7F9571B2A00}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,11 +15,15 @@ Global
 		{C47E98E7-7BBF-4651-F2D2-185C93ABA45B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C47E98E7-7BBF-4651-F2D2-185C93ABA45B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C47E98E7-7BBF-4651-F2D2-185C93ABA45B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17F0FAD1-E773-C2DC-0C73-A7F9571B2A00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17F0FAD1-E773-C2DC-0C73-A7F9571B2A00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17F0FAD1-E773-C2DC-0C73-A7F9571B2A00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17F0FAD1-E773-C2DC-0C73-A7F9571B2A00}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-									GlobalSection(MonoDevelopProperties) = preSolution
+														GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1
