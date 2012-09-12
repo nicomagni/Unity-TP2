@@ -1,5 +1,10 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
+using System.Xml.Serialization;
+using System.Xml;
 
 public class CarMove : MonoBehaviour {
 
@@ -36,7 +41,7 @@ public class CarMove : MonoBehaviour {
 	private float localEulerAngles;
 	Vector3 aux;
 	public int nextPoint = 0;
-	
+	public int step = 1;
 	
 	private List<Transform> levelsPahtList;
 	private List<Vector3> currentPositionPathList;
@@ -57,17 +62,27 @@ public class CarMove : MonoBehaviour {
 		steer = Mathf.Clamp(Input.GetAxis("Horizontal"), -1, 1);
 		forward = Mathf.Clamp(Input.GetAxis("Vertical"), 0, 1);
 		back = -1 * Mathf.Clamp(Input.GetAxis("Vertical"), -1, 0);
+		
 		if(Input.GetKeyDown(KeyCode.G)){
 			shouldSavePath = !shouldSavePath;
 		}
+		
+		if(Input.GetKeyUp(KeyCode.S)){
+			//save();
+		}
+		
+		if(Input.GetKeyUp(KeyCode.L)){
+			//load();
+		}
+		
 		if(Input.GetKeyDown(KeyCode.R)){
 			shouldReplay = !shouldReplay;
 		}
 	 	if(shouldReplay){
-			if(nextPoint < currentPositionPathList.Count){
-				Vector3 currentPosition = currentPositionPathList[nextPoint++];
-				Quaternion currentRotation = currentRotatePathList[nextPoint++];
-				
+			if(nextPoint < currentPositionPathList.Count - step){
+				nextPoint += step;
+				Vector3 currentPosition = currentPositionPathList[nextPoint];
+				Quaternion currentRotation = currentRotatePathList[nextPoint];
 				transform.position = currentPosition;
 				transform.rotation = currentRotation;
 			}
@@ -97,15 +112,20 @@ public class CarMove : MonoBehaviour {
 			wheelRightRear.Rotate(wheelColliderRightRear.rpm * -6F * Time.deltaTime,0,0);
 			wheelLeftRear.Rotate(wheelColliderLeftRear.rpm * 6F * Time.deltaTime,0,0);
 			
-			localEulerAngles = steer_max * steer;
-			aux = new Vector3(0,localEulerAngles,0);
-			//		wheelRightFront.localEulerAngles = aux;
 			
+			localEulerAngles = steer_max * steer;
+			aux = new Vector3(localEulerAngles,localEulerAngles,0);
+			wheelLeftFront.localEulerAngles = aux;
+			
+			
+			//wheelRightFront.Rotate(wheelColliderRightFront.rpm * -6F * Time.deltaTime, 0, 0);
+			//wheelRightFront.Rotate(wheelColliderRightFront.rpm * -6F * Time.deltaTime, localEulerAngles-wheelRightFront.transform.rotation.y, 0);
 			localEulerAngles= steer_max * steer;
 			aux = new Vector3(0,180 + localEulerAngles,0);
-			//		wheelLeftFront.localEulerAngles = aux;
-			wheelRightFront.Rotate(wheelColliderRightFront.rpm * -6F * Time.deltaTime, 0, 0);
-			wheelLeftFront.Rotate(wheelColliderLeftFront.rpm * 6F * Time.deltaTime,0,0);
+			wheelRightFront.localEulerAngles = aux;
+			
+			//wheelLeftFront.Rotate(wheelColliderLeftFront.rpm * 6F * Time.deltaTime,0,0);
+			//wheelLeftFront.Rotate(wheelColliderLeftFront.rpm * 6F * Time.deltaTime,180 + localEulerAngles,0);
 			
 			if(shouldSavePath){
 				saveTrasnformation();
@@ -119,12 +139,37 @@ public class CarMove : MonoBehaviour {
 	
 		//print(deltaMiliSecondsRecord);
 		float timepased = lastPathMilisencods + deltaMiliSecondsRecord;
-		print(timepased);
+		
 		if( timepased < Time.time){
 			lastPathMilisencods = Time.time;
 			currentPositionPathList.Add(transform.position);
 			currentRotatePathList.Add(transform.rotation);
 		}
 	}
+	/*
+	public void save() {
+		string path = Application.persistentDataPath + "/trasnformPath.txt";
+		Stream stream = File.Open(path, FileMode.Create);
+		XMLSerializer bformatter = new XmlSerializer();
+	            
+		print("Writing Employee Information " +  path);
+		
+		Quaternion t = new Quaternion(1,2,3,4);	
+		bformatter.Serialize(stream, t);
+		stream.Close();
+		print("ANDTES" + currentRotatePathList.Count);
+	}
 	
+	public void load(){
+		string path = Application.persistentDataPath + "/trasnformPath.txt";
+		Stream stream = File.Open(path, FileMode.Open);
+		BinaryFormatter bformatter = new BinaryFormatter();
+
+		//List<Quaternion> mp = (List<Quaternion>)bformatter.Deserialize(stream);
+		Quaternion mp = (Quaternion)bformatter.Deserialize(stream);
+		stream.Close();
+            
+		print("Dspuyes" + mp);
+	}
+	 */
 }
