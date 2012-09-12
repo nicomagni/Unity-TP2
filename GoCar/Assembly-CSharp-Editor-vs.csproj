@@ -5,11 +5,11 @@
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{C47E98E7-7BBF-4651-F2D2-185C93ABA45B}</ProjectGuid>
+	<ProjectGuid>{17F0FAD1-E773-C2DC-0C73-A7F9571B2A00}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
-	<AssemblyName>Assembly-CSharp</AssemblyName>
+	<AssemblyName>Assembly-CSharp-Editor</AssemblyName>
 	<TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
 	<FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -44,12 +44,15 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Road and Path Tool\AttachedPathScript.cs" />
-     <Compile Include="Assets\Road and Path Tool\PathScript.cs" />
-     <Compile Include="Assets\Scripts\CarMove.cs" />
+     <Compile Include="Assets\Road and Path Tool\Editor\AttachedPathEditor.cs" />
+     <Compile Include="Assets\Road and Path Tool\Editor\PathEditor.cs" />
      <None Include="Assets\Road and Path Tool\tutorial.txt" />
      <None Include="Assets\Road and Path Tool\Shader\Diffuse_RoadOffset.shader" />
      <None Include="Assets\Standard Assets\Skyboxes\_skybox info.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-vs.csproj">
+      <Project>{C47E98E7-7BBF-4651-F2D2-185C93ABA45B}</Project>      <Name>Assembly-CSharp-vs</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
