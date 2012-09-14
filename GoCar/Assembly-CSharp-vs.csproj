@@ -46,7 +46,9 @@
   <ItemGroup>
      <Compile Include="Assets\Road and Path Tool\AttachedPathScript.cs" />
      <Compile Include="Assets\Road and Path Tool\PathScript.cs" />
+     <Compile Include="Assets\Scripts\CarInteligenceScript.cs" />
      <Compile Include="Assets\Scripts\CarMove.cs" />
+     <Compile Include="Assets\Scripts\CheckPointScript.cs" />
      <None Include="Assets\Road and Path Tool\tutorial.txt" />
      <None Include="Assets\Road and Path Tool\Shader\Diffuse_RoadOffset.shader" />
      <None Include="Assets\Standard Assets\Skyboxes\_skybox info.txt" />

@@ -43,7 +43,7 @@ public class CarMove : MonoBehaviour {
 	public int nextPoint = 0;
 	public int step = 1;
 	
-	private List<Transform> levelsPahtList;
+	public List<Transform> levelsPahtList;
 	private List<Vector3> currentPositionPathList;
 	private List<Quaternion> currentRotatePathList;
 	
@@ -146,7 +146,7 @@ public class CarMove : MonoBehaviour {
 			currentRotatePathList.Add(transform.rotation);
 		}
 	}
-	/*
+/*	
 	public void save() {
 		string path = Application.persistentDataPath + "/trasnformPath.txt";
 		Stream stream = File.Open(path, FileMode.Create);
