@@ -2,10 +2,9 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/CheckPointScript.cs">
     <Files>
-      <File FileName="../../../../Dropbox/videojuegos/tests-1/Assets/Scripts/CarScript.cs" Line="27" Column="1" />
       <File FileName="Assets/Scripts/CarMove.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/CarInteligenceScript.cs" Line="8" Column="2" />
-      <File FileName="Assets/Scripts/CheckPointScript.cs" Line="21" Column="41" />
+      <File FileName="Assets/Scripts/CarInteligenceScript.cs" Line="16" Column="52" />
+      <File FileName="Assets/Scripts/CheckPointScript.cs" Line="22" Column="57" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

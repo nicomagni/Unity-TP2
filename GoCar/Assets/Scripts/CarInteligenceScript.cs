@@ -13,7 +13,7 @@ public class CarInteligenceScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		
-		moveToCheckPoint(firstCheck.transform.position, 100);
+		moveToCheckPoint(firstCheck.transform.position, 20);
 		
 	}
 
@@ -22,7 +22,7 @@ public class CarInteligenceScript : MonoBehaviour {
 		if(currentStep < arrayListPath.Count){
 			if(currentStep + 1 < arrayListPath.Count){
 				Vector3 newVectorDirection = arrayListPath[currentStep + 1] - transform.position;
-				print(Vector3.Angle(newVectorDirection,transform.position.normalized));
+				//print(Vector3.Angle(newVectorDirection,transform.position.normalized));
 
 				transform.LookAt(newVectorDirection.normalized + transform.position);
 			}
