@@ -9,11 +9,12 @@ public class CarInteligenceScript : MonoBehaviour {
 	public List<Vector3> arrayListPath;
 	public int maxPoints = 100;
 	public int currentStep = 0;
+	public float speedFactor = 1;
 	
 	// Use this for initialization
 	void Start () {
 		
-		moveToCheckPoint(firstCheck.transform.position, 20);
+		moveToCheckPoint(firstCheck.transform.position, 2);
 		
 	}
 
@@ -32,8 +33,9 @@ public class CarInteligenceScript : MonoBehaviour {
     }
 	
 	public void moveToCheckPoint(Vector3 nextCheckPosition, int velocity) {
+		float distance = Vector3.Distance(nextPosition, nextCheckPosition)/100;
 		nextPosition = nextCheckPosition;
-		maxPoints = velocity;
+		maxPoints = (int) (distance * velocity * speedFactor);
 		currentStep = 0;
 		//Vector3 directionVector = nextPosition - transform.position;
 		arrayListPath = new List<Vector3>();
