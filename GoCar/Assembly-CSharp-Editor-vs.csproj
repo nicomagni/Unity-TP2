@@ -46,6 +46,7 @@
   <ItemGroup>
      <Compile Include="Assets\Road and Path Tool\Editor\AttachedPathEditor.cs" />
      <Compile Include="Assets\Road and Path Tool\Editor\PathEditor.cs" />
+     <Compile Include="Assets\Scripts\Editor\CreateCheckPoint.cs" />
      <None Include="Assets\Road and Path Tool\tutorial.txt" />
      <None Include="Assets\Road and Path Tool\Shader\Diffuse_RoadOffset.shader" />
      <None Include="Assets\Standard Assets\Skyboxes\_skybox info.txt" />
