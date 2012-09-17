@@ -18,8 +18,8 @@ public class CheckPointScript : MonoBehaviour {
 	
 	void OnTriggerEnter(Collider other) {
 		CarInteligenceScript carScript = (CarInteligenceScript) other.gameObject.GetComponent(typeof(CarInteligenceScript));
-		float randomPosition = Random.Range(-3.0F,3.0F);
-		Vector3 newPosition = new Vector3(randomPosition,0,randomPosition);
-		carScript.moveToCheckPoint(nextCheckPoint.transform.position + newPosition, Random.Range(30, 35)); 
+		float randLimit = 5.0F;
+		Vector3 newPosition = new Vector3(Random.Range(-randLimit,randLimit),0,Random.Range(-randLimit,randLimit));
+		carScript.moveToCheckPoint(nextCheckPoint.transform.position + newPosition, Random.Range(30, 40)); 
 	}
 }
