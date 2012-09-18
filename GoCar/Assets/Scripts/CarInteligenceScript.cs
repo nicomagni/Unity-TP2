@@ -6,6 +6,10 @@ public class CarInteligenceScript : MonoBehaviour {
 	public GameObject firstCheck;
 	private Vector3 nextPosition;
 	
+	public bool isSplash = false;
+	
+	private LapController lapController;
+	
 	public List<Vector3> arrayListPath;
 	public int maxPoints = 100;
 	public int currentStep = 0;
@@ -19,6 +23,14 @@ public class CarInteligenceScript : MonoBehaviour {
 	}
 
     void FixedUpdate() {
+		if(!isSplash && GetLapController().HasFinished()) {
+			return;
+		}
+		
+		if(!GetLapController().hasStarted()) {
+			return;
+		}
+		
 		
 		if(currentStep < arrayListPath.Count){
 			if(currentStep + 1 < arrayListPath.Count){
@@ -57,5 +69,12 @@ public class CarInteligenceScript : MonoBehaviour {
             
         
     }
-	
+
+	private LapController GetLapController(){
+		if(lapController == null) {
+			lapController = (LapController) GameObject.FindGameObjectWithTag("LapController").GetComponent(typeof(LapController));
+		}
+		
+		return lapController;
+	}
 }

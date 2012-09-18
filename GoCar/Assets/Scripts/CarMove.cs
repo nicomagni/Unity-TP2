@@ -8,6 +8,8 @@ using System.Xml;
 
 public class CarMove : MonoBehaviour {
 
+	private LapController lapController;
+	
 	public GameObject shield;
 	public int rotDrag = 10;
 	public WheelCollider wheelColliderLeftRear;
@@ -57,6 +59,11 @@ public class CarMove : MonoBehaviour {
 	}
 	
 	void FixedUpdate () {
+		if(GetLapController().HasFinished()) {
+			motor = 0;
+//			return;
+		}
+		
 		//	updateMovement();
 		speed = rigidbody.velocity.sqrMagnitude;
 			
@@ -166,6 +173,13 @@ public class CarMove : MonoBehaviour {
         
     }
 
+	private LapController GetLapController(){
+		if(lapController == null) {
+			lapController = (LapController) GameObject.FindGameObjectWithTag("LapController").GetComponent(typeof(LapController));
+		}
+		
+		return lapController;
+	}
 	
 /*	
 	public void save() {

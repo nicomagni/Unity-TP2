@@ -51,6 +51,7 @@
      <Compile Include="Assets\Scripts\CheckPointScript.cs" />
      <Compile Include="Assets\Scripts\LapController.cs" />
      <Compile Include="Assets\Scripts\MathUtils.cs" />
+     <Compile Include="Assets\Scripts\SplashManager.cs" />
      <Compile Include="Assets\Scripts\SplineController.cs" />
      <Compile Include="Assets\Scripts\SplineInterpolator.cs" />
      <Compile Include="Assets\Scripts\TerrainLevel1Script.cs" />
