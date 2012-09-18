@@ -28,7 +28,9 @@ public class CarInteligenceScript : MonoBehaviour {
 				transform.LookAt(newVectorDirection.normalized + transform.position);
 			}
 			
-			transform.position = arrayListPath[currentStep++];
+			//transform.position = arrayListPath[currentStep++];
+			rigidbody.MovePosition(arrayListPath[currentStep++]);
+			
 		}
     }
 	
@@ -46,5 +48,14 @@ public class CarInteligenceScript : MonoBehaviour {
 		}
 	}
 	
+	 void OnCollisionEnter(Collision collision) {
+        foreach (ContactPoint contact in collision.contacts) {
+            Debug.DrawRay(contact.point, contact.normal, Color.white);
+			rigidbody.AddForce(contact.normal);
+			print (contact.normal);
+        }
+            
+        
+    }
 	
 }
