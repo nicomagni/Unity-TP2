@@ -40,6 +40,7 @@ public class CarMove : MonoBehaviour {
 	private bool reverse;
 	private float localEulerAngles;
 	Vector3 aux;
+	public int choque= 2;
 	public int nextPoint = 0;
 	public int step = 1;
 	
@@ -147,9 +148,24 @@ public class CarMove : MonoBehaviour {
 		}
 	}
 	
+
 	public float getCurrentSpeed() {
 		return rigidbody.velocity.sqrMagnitude;
 	}
+
+	void OnCollisionEnter(Collision collision) {
+		CarInteligenceScript carScript = (CarInteligenceScript) collision.collider.gameObject.GetComponent(typeof(CarInteligenceScript));
+		if(carScript){
+			foreach (ContactPoint contact in collision.contacts) {
+				//   Debug.DrawRay(contact.point, contact.normal, Color.red);
+				rigidbody.AddForce(contact.normal * 0.1F * rigidbody.velocity.sqrMagnitude,ForceMode.Impulse);
+				
+			}
+		}
+        
+        
+    }
+
 	
 /*	
 	public void save() {
