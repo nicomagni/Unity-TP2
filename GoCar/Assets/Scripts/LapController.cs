@@ -76,7 +76,7 @@ public class LapController : MonoBehaviour {
 	void Update () {
 		if(this.HasFinished()) print ("Ganador Auto: " + winner);
 		else {
-			print ("Vuelta: " + laps[0] + " - Pos: " + GetPosition(0));
+			//print ("Vuelta: " + laps[0] + " - Pos: " + GetPosition(0));
 		}
 	}
 }

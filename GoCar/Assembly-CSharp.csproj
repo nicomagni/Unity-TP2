@@ -50,6 +50,10 @@
      <Compile Include="Assets\Scripts\CarMove.cs" />
      <Compile Include="Assets\Scripts\CheckPointScript.cs" />
      <Compile Include="Assets\Scripts\LapController.cs" />
+     <Compile Include="Assets\Scripts\MathUtils.cs" />
+     <Compile Include="Assets\Scripts\SplineController.cs" />
+     <Compile Include="Assets\Scripts\SplineInterpolator.cs" />
+     <Compile Include="Assets\Scripts\TerrainLevel1Script.cs" />
      <None Include="Assets\Road and Path Tool\tutorial.txt" />
      <None Include="Assets\Road and Path Tool\Shader\Diffuse_RoadOffset.shader" />
      <None Include="Assets\Standard Assets\Skyboxes\_skybox info.txt" />
