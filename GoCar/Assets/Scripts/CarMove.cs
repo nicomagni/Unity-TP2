@@ -146,6 +146,11 @@ public class CarMove : MonoBehaviour {
 			currentRotatePathList.Add(transform.rotation);
 		}
 	}
+	
+	public float getCurrentSpeed() {
+		return rigidbody.velocity.sqrMagnitude;
+	}
+	
 /*	
 	public void save() {
 		string path = Application.persistentDataPath + "/trasnformPath.txt";
