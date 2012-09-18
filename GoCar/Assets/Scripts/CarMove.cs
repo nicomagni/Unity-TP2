@@ -14,7 +14,7 @@ public class CarMove : MonoBehaviour {
 	public WheelCollider wheelColliderRightRear;
 	public WheelCollider wheelColliderLeftFront;
 	public WheelCollider wheelColliderRightFront;
-	
+	public GameObject mass_center;
 	public Transform wheelLeftRear;
 	public Transform wheelRightRear;
 	public Transform wheelLeftFront;
@@ -52,7 +52,7 @@ public class CarMove : MonoBehaviour {
 		currentPositionPathList = new List<Vector3>();
 		currentRotatePathList = new List<Quaternion>();
 		lastPathMilisencods = Time.time;
-		rigidbody.centerOfMass = new Vector3(0,-0.5F,0);
+		rigidbody.centerOfMass = new Vector3(0,-0.1F,0.3F);
 	}
 	
 	void FixedUpdate () {
