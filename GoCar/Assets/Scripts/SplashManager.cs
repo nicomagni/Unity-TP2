@@ -25,11 +25,11 @@ public class SplashManager : MonoBehaviour {
 		style.normal.textColor = Color.white;
 		style.alignment = TextAnchor.MiddleCenter;
 	
-		GUI.Label(new Rect((Screen.width-500)/2, 100, 600, 100), "High Sprint", style);
+		GUI.Label(new Rect((Screen.width-600)/2, 100, 600, 100), "High Sprint", style);
 
 		style.fontSize = 25;
 		style.normal.textColor = Color.yellow;
-		GUI.Label(new Rect((Screen.width-600)/2, 400, 700, 100), "Press any key to start!", style);
+		GUI.Label(new Rect((Screen.width-700)/2, 400, 700, 100), "Press any key to start!", style);
 
 	}
 	

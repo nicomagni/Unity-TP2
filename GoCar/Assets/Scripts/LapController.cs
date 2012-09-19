@@ -8,7 +8,7 @@ public class LapController : MonoBehaviour {
 	public GUISkin mySkin;
 	
 	public static int cars = 4;
-	public static int waypoints = 21;
+	public int waypoints = 21;
 	public static int max_laps = 4;
 	
 	private int secondsToStart = 3;
@@ -24,18 +24,26 @@ public class LapController : MonoBehaviour {
 	private int winner = -1;
 	
 	private CarMove carMove;
-
+	
+	private List<string> levels;
+	
 	void Start () {
+		levels = new List<string>();
+		levels.Add("roundLevel");
+		levels.Add("basicLevel");
+		levels.Add("hardLevel");
+		
 		timeFromStart = Time.time+secondsToStart;
 		started = false;
-	}
-
-	// init the data structure
-	public LapController(){
 		for( int i = 0 ; i < cars ; i++ ) {
 			wps_track.Add(new List<bool>());
 			for(int j = 0 ; j < waypoints ; j++) wps_track[i].Add(false);
 		}
+	}
+
+	// init the data structure
+	public LapController(){
+
 	}
 	
 	public void TrackWaypoint(int waypoint, int car){
@@ -106,32 +114,45 @@ public class LapController : MonoBehaviour {
 			GUI.Label(new Rect((Screen.width-70)/2, (Screen.height-100)/2, 150, 100), " " + seconds, style);
 		} else {
 			GUI.Label(new Rect(20, 20, 200, 40), "Lap: " + GetLap(0) +"/"+max_laps, style);
-			GUI.Label(new Rect(20, 40, 200, 40), "Position: " + GetPosition(0), style);		
 			
 			float currSpeed = GetCarMove().getCurrentSpeed()/80;
 			if(currSpeed < 5F)
 				currSpeed = 0;
 			
-			GUI.Label(new Rect(20, 60, 200, 40), "Speed: " + System.Math.Floor(currSpeed), style);
+			GUI.Label(new Rect(20, 50, 200, 40), "Speed: " + System.Math.Floor(currSpeed), style);
 			
 			if(HasFinished()) {
-				string bigMsj = "You win!";
-				string smallMsj = "play next level";
-				if(winner!=-1) {
-					bigMsj = "Player " + winner + " wins";
-					smallMsj = "play again";
-				}
-				
 				style.alignment = TextAnchor.MiddleCenter;
-			
-				style.fontSize = 60;	
-				GUI.Label(new Rect((Screen.width-500)/2, (Screen.height+100)/2, 600, 100), bigMsj, style);
+	
+				string nextLevel = Application.loadedLevelName;	
+				string bigMsj = "Player " + winner + " wins";
+				string smallMsj = "play again";
+
+				int nextLevelIndex = levels.IndexOf(nextLevel)+1;
+				
+				if(winner==0) {
+					if(nextLevelIndex < levels.Count) {
+						bigMsj = "You win!";
+						smallMsj = "play next level";
+						nextLevel = levels[nextLevelIndex];			
+					} else {
+						style.fontSize = 30;
+						string altMsj = "You won the whole game";
+						GUI.Label(new Rect((Screen.width-600)/2, (Screen.height-100)/2, 600, 100), altMsj, style);	
+						bigMsj = "Congratulations!";
+						smallMsj = "go to main menu";
+						nextLevel = "splashScene";
+					}
+				}
+
+				style.fontSize = 40;
+				GUI.Label(new Rect((Screen.width-600)/2, (Screen.height+100)/2, 600, 100), bigMsj, style);
+
 				style.fontSize = 25;
 				style.normal.textColor = Color.yellow;
-				style.alignment = TextAnchor.MiddleCenter;
 				GUI.Label(new Rect((Screen.width-700)/2, (Screen.height+300)/2, 700, 100), "Press any key to " + smallMsj, style);
 				if(Input.anyKeyDown){
-	//				Application.LoadLevel("playScene");
+					Application.LoadLevel(nextLevel);
 				}
 			}
 		}

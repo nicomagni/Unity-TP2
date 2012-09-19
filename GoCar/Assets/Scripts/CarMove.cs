@@ -28,7 +28,7 @@ public class CarMove : MonoBehaviour {
 	public float brake_max = 100F;
 	
 	public int levelsRecordLimit = 1;
-	public float deltaMiliSecondsRecord = 0.01F;
+	public float deltaMiliSecondsRecord = 3F;
 	public bool shouldSavePath = false;
 	public bool shouldReplay = false;
 	private float lastPathMilisencods = 0F;
@@ -46,6 +46,8 @@ public class CarMove : MonoBehaviour {
 	public int nextPoint = 0;
 	public int step = 1;
 	
+	public Transform lastTransform;
+	
 	public List<Transform> levelsPahtList;
 	private List<Vector3> currentPositionPathList;
 	private List<Quaternion> currentRotatePathList;
@@ -59,9 +61,11 @@ public class CarMove : MonoBehaviour {
 	}
 	
 	void FixedUpdate () {
-		if(GetLapController().HasFinished()) {
-			motor = 0;
-//			return;
+		if(GetLapController().HasFinished() || !GetLapController().hasStarted()) {
+			wheelColliderLeftRear.motorTorque = 0;
+			wheelColliderRightRear.motorTorque = 0;
+			
+			return;
 		}
 		
 		//	updateMovement();
@@ -71,18 +75,14 @@ public class CarMove : MonoBehaviour {
 		forward = Mathf.Clamp(Input.GetAxis("Vertical"), 0, 1);
 		back = -1 * Mathf.Clamp(Input.GetAxis("Vertical"), -1, 0);
 		
-		if(Input.GetKeyDown(KeyCode.G)){
-			shouldSavePath = !shouldSavePath;
-		}
+	//	if(Input.GetKeyDown(KeyCode.G)){
+	//		shouldSavePath = !shouldSavePath;
+	//	}
 		
-		if(Input.GetKeyUp(KeyCode.S)){
-			//save();
+		if(Input.GetKeyUp(KeyCode.Space)){
+			spawnCarAtLastPosition();
 		}
-		
-		if(Input.GetKeyUp(KeyCode.L)){
-			//load();
-		}
-		
+
 		if(Input.GetKeyDown(KeyCode.R)){
 			shouldReplay = !shouldReplay;
 		}
@@ -135,9 +135,9 @@ public class CarMove : MonoBehaviour {
 			//wheelLeftFront.Rotate(wheelColliderLeftFront.rpm * 6F * Time.deltaTime,0,0);
 			//wheelLeftFront.Rotate(wheelColliderLeftFront.rpm * 6F * Time.deltaTime,180 + localEulerAngles,0);
 			
-			if(shouldSavePath){
-				saveTrasnformation();
-			}
+			
+			saveTrasnformation();
+			
 			
 		}
 		
@@ -149,12 +149,25 @@ public class CarMove : MonoBehaviour {
 		float timepased = lastPathMilisencods + deltaMiliSecondsRecord;
 		
 		if( timepased < Time.time){
+			
 			lastPathMilisencods = Time.time;
 			currentPositionPathList.Add(transform.position);
 			currentRotatePathList.Add(transform.rotation);
+			
+			
 		}
 	}
 	
+	public void spawnCarAtLastPosition(){
+		if(currentRotatePathList.Count == 0){
+				transform.localPosition=new Vector3(0,0,0);
+			}else{
+				Vector3 currentPosition = currentPositionPathList[currentPositionPathList.Count - 1];
+				Quaternion currentRotation = currentRotatePathList[currentRotatePathList.Count - 1];
+				transform.position = currentPosition;
+				transform.rotation = currentRotation;
+			}
+	}
 
 	public float getCurrentSpeed() {
 		return rigidbody.velocity.sqrMagnitude;

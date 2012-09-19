@@ -27,7 +27,7 @@ public class CarInteligenceScript : MonoBehaviour {
 			return;
 		}
 		
-		if(!GetLapController().hasStarted()) {
+		if(!isSplash && !GetLapController().hasStarted()) {
 			return;
 		}
 		
@@ -64,7 +64,7 @@ public class CarInteligenceScript : MonoBehaviour {
         foreach (ContactPoint contact in collision.contacts) {
             Debug.DrawRay(contact.point, contact.normal, Color.white);
 			rigidbody.AddForce(contact.normal);
-			print (contact.normal);
+			//print (contact.normal);
         }
             
         
