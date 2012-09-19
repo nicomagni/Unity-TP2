@@ -32,9 +32,13 @@ public class CheckPointScript : MonoBehaviour {
 		}
 		CarInteligenceScript carScript = (CarInteligenceScript) other.gameObject.GetComponent(typeof(CarInteligenceScript));
 		if(carScript != null) {
-			float randLimit = 6.0F;
-			Vector3 newPosition = new Vector3(UnityEngine.Random.Range(-randLimit,randLimit),0,UnityEngine.Random.Range(-randLimit,randLimit));
-			carScript.moveToCheckPoint(nextCheckPoint.transform.position + newPosition, 30);			
+			float randLimit = 0.3F;
+			
+			Vector3 newPosition = new Vector3(UnityEngine.Random.Range(-randLimit,randLimit),0,0);
+			print ("New Relative " + newPosition);
+			Vector3 newPos = nextCheckPoint.transform.TransformPoint( newPosition);
+			print ("New Global " + newPos);
+			carScript.moveToCheckPoint(newPos, 30);	
 		}
 
 		//Random.Range(30, 40)
